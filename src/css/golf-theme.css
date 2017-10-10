@@ -1,0 +1,329 @@
+.color-golf {
+  color: #003d00;
+}
+.list-block .item-link.list-button.color-golf,
+.list-block .item-link.color-golf,
+.tabbar a.active.color-golf,
+a.color-golf {
+  color: #003d00;
+}
+.label-switch input[type="checkbox"]:checked + .checkbox.color-golf,
+.label-switch.color-golf input[type="checkbox"]:checked + .checkbox {
+  background-color: #003d00;
+}
+.theme-golf .button:not(.button-fill) {
+  color: #003d00;
+}
+.theme-golf .navbar .button:not(.button-fill),
+.theme-golf.navbar .button:not(.button-fill),
+.theme-golf .toolbar .button:not(.button-fill),
+.theme-golf.toolbar .button:not(.button-fill),
+.theme-golf .subnavbar .button:not(.button-fill),
+.theme-golf.subnavbar .button:not(.button-fill) {
+  color: #fff;
+}
+.button.color-golf:not(.button-fill),
+.color-golf.buttons-row .button:not(.button-fill) {
+  color: #003d00 !important;
+}
+.theme-golf .button.button-fill {
+  background: #003d00;
+  color: #fff;
+}
+html:not(.watch-active-state) .theme-golf .button.button-fill:active,
+.theme-golf .button.button-fill.active-state {
+  background: #629749;
+}
+.button.button-fill.bg-golf,
+.button.button-fill.color-golf {
+  background: #003d00 !important;
+  color: #fff;
+}
+html:not(.watch-active-state) .button.button-fill.bg-golf:active,
+html:not(.watch-active-state) .button.button-fill.color-golf:active,
+.button.button-fill.bg-golf.active-state,
+.button.button-fill.color-golf.active-state {
+  background: #629749 !important;
+}
+.progressbar.color-golf,
+.progressbar.theme-golf,
+.theme-golf .progressbar,
+.progressbar.bg-golf {
+  background-color: rgba(98, 151, 73,  0.5);
+}
+.progressbar.color-golf span,
+.progressbar.theme-golf span,
+.theme-golf .progressbar span,
+.progressbar.bg-golf span {
+  background-color: #003d00;
+}
+.progressbar-infinite.color-golf,
+.progressbar-infinite.theme-golf,
+.theme-golf .progressbar-infinite,
+.progressbar-infinite.bg-golf {
+  background-color: rgba(98, 151, 73,  0.5);
+}
+.progressbar-infinite.color-golf:after,
+.progressbar-infinite.theme-golf:after,
+.theme-golf .progressbar-infinite:after,
+.progressbar-infinite.bg-golf:after,
+.progressbar-infinite.color-golf:before,
+.progressbar-infinite.theme-golf:before,
+.theme-golf .progressbar-infinite:before,
+.progressbar-infinite.bg-golf:before {
+  background-color: #003d00;
+}
+.color-golf i.icon,
+i.icon.color-golf {
+  color: #003d00;
+}
+i.icon-next.color-golf,
+i.icon-next.theme-golf {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20fill%3D'%23f44336'%20width%3D'24'%20height%3D'24'%20viewBox%3D'0%200%2024%2024'%3E%3Cpath%20d%3D'M10%206L8.59%207.41%2013.17%2012l-4.58%204.59L10%2018l6-6z'%2F%3E%3Cpath%20d%3D'M0%200h24v24H0z'%20fill%3D'none'%2F%3E%3C%2Fsvg%3E");
+}
+i.icon-prev.color-golf,
+i.icon-prev.theme-golf {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20fill%3D'%23f44336'%20width%3D'24'%20height%3D'24'%20viewBox%3D'0%200%2024%2024'%3E%3Cpath%20d%3D'M15.41%207.41L14%206l-6%206%206%206%201.41-1.41L10.83%2012z'%2F%3E%3Cpath%20d%3D'M0%200h24v24H0z'%20fill%3D'none'%2F%3E%3C%2Fsvg%3E");
+}
+i.icon-back.color-golf,
+i.icon-back.theme-golf {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'24'%20height%3D'24'%20viewBox%3D'0%200%2024%2024'%3E%3Cpath%20d%3D'M20%2011H7.83l5.59-5.59L12%204l-8%208%208%208%201.41-1.41L7.83%2013H20v-2z'%20fill%3D'%23f44336'%2F%3E%3C%2Fsvg%3E");
+}
+i.icon-forward.color-golf,
+i.icon-forward.theme-golf {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'24'%20height%3D'24'%20viewBox%3D'0%200%2024%2024'%3E%3Cpath%20d%3D'M12%204l-1.41%201.41L16.17%2011H4v2h12.17l-5.58%205.59L12%2020l8-8z'%20fill%3D'%23f44336'%2F%3E%3C%2Fsvg%3E");
+}
+i.icon-bars.color-golf,
+i.icon-bars.theme-golf {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'24'%20height%3D'24'%20viewBox%3D'0%200%2024%2024'%3E%3Cpath%20d%3D'M3%2018h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z'%20fill%3D'%23f44336'%2F%3E%3C%2Fsvg%3E");
+}
+.preloader.color-golf svg circle,
+.preloader.preloader-golf svg circle {
+  stroke: #003d00;
+}
+.preloader.color-golf .preloader-inner-gap,
+.preloader.preloader-golf .preloader-inner-gap,
+.preloader.color-golf .preloader-inner-half-circle,
+.preloader.preloader-golf .preloader-inner-half-circle {
+  border-color: #003d00;
+}
+.theme-golf a {
+  color: #003d00;
+}
+.theme-golf .navbar,
+.navbar.theme-golf,
+.theme-golf .toolbar,
+.toolbar.theme-golf,
+.theme-golf .subnavbar,
+.subnavbar.theme-golf,
+.theme-golf .searchbar,
+.searchbar.theme-golf {
+  background-color: #003d00;
+}
+.theme-golf .range-slider input[type="range"]::-webkit-slider-thumb:before,
+.range-slider.theme-golf input[type="range"]::-webkit-slider-thumb:before {
+  background-color: #003d00;
+}
+.theme-golf .range-slider input[type="range"]::-webkit-slider-thumb,
+.range-slider.theme-golf input[type="range"]::-webkit-slider-thumb {
+  background-color: #003d00;
+}
+.theme-golf .range-slider input[type="range"]::-ms-thumb,
+.range-slider.theme-golf input[type="range"]::-ms-thumb {
+  background-color: #003d00;
+}
+.theme-golf .range-slider input[type="range"]::-ms-fill-lower,
+.range-slider.theme-golf input[type="range"]::-ms-fill-lower {
+  background-color: #003d00;
+}
+.theme-golf .range-slider input[type="range"]::-moz-range-thumb,
+.range-slider.theme-golf input[type="range"]::-moz-range-thumb {
+  background-color: #003d00;
+}
+.theme-golf .label-switch input[type="checkbox"]:checked + .checkbox,
+.label-switch.theme-golf input[type="checkbox"]:checked + .checkbox {
+  background-color: rgba(98, 151, 73,  0.5);
+}
+.theme-golf .label-switch input[type="checkbox"]:checked + .checkbox:after,
+.label-switch.theme-golf input[type="checkbox"]:checked + .checkbox:after {
+  background-color: #003d00;
+}
+.theme-golf label.label-checkbox,
+label.label-checkbox.theme-golf {
+  cursor: pointer;
+}
+.theme-golf label.label-checkbox i.icon-form-checkbox:after,
+label.label-checkbox.theme-golf i.icon-form-checkbox:after {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20fill%3D'%23ffffff'%20width%3D'24'%20height%3D'24'%20viewBox%3D'0%200%2024%2024'%3E%3Cpath%20d%3D'M9%2016.17L4.83%2012l-1.42%201.41L9%2019%2021%207l-1.41-1.41z'%2F%3E%3C%2Fsvg%3E");
+}
+.theme-golf label.label-checkbox input[type="checkbox"]:checked + .item-media i.icon-form-checkbox,
+label.label-checkbox.theme-golf input[type="checkbox"]:checked + .item-media i.icon-form-checkbox,
+.theme-golf label.label-checkbox input[type="radio"]:checked + .item-media i.icon-form-checkbox,
+label.label-checkbox.theme-golf input[type="radio"]:checked + .item-media i.icon-form-checkbox,
+.theme-golf label.label-checkbox input[type="checkbox"]:checked ~ .item-after i.icon-form-checkbox,
+label.label-checkbox.theme-golf input[type="checkbox"]:checked ~ .item-after i.icon-form-checkbox,
+.theme-golf label.label-checkbox input[type="radio"]:checked ~ .item-after i.icon-form-checkbox,
+label.label-checkbox.theme-golf input[type="radio"]:checked ~ .item-after i.icon-form-checkbox,
+.theme-golf label.label-checkbox input[type="checkbox"]:checked ~ .item-inner i.icon-form-checkbox,
+label.label-checkbox.theme-golf input[type="checkbox"]:checked ~ .item-inner i.icon-form-checkbox,
+.theme-golf label.label-checkbox input[type="radio"]:checked ~ .item-inner i.icon-form-checkbox,
+label.label-checkbox.theme-golf input[type="radio"]:checked ~ .item-inner i.icon-form-checkbox {
+  border-color: #003d00;
+  background-color: #003d00;
+}
+.theme-golf label.label-radio i.icon-form-radio:after,
+label.label-radio.theme-golf i.icon-form-radio:after {
+  background-color: #003d00;
+}
+.theme-golf label.label-radio input[type="checkbox"]:checked + .item-media i.icon-form-radio,
+label.label-radio.theme-golf input[type="checkbox"]:checked + .item-media i.icon-form-radio,
+.theme-golf label.label-radio input[type="radio"]:checked + .item-media i.icon-form-radio,
+label.label-radio.theme-golf input[type="radio"]:checked + .item-media i.icon-form-radio,
+.theme-golf label.label-radio input[type="checkbox"]:checked ~ .item-after i.icon-form-radio,
+label.label-radio.theme-golf input[type="checkbox"]:checked ~ .item-after i.icon-form-radio,
+.theme-golf label.label-radio input[type="radio"]:checked ~ .item-after i.icon-form-radio,
+label.label-radio.theme-golf input[type="radio"]:checked ~ .item-after i.icon-form-radio,
+.theme-golf label.label-radio input[type="checkbox"]:checked ~ .item-inner i.icon-form-radio,
+label.label-radio.theme-golf input[type="checkbox"]:checked ~ .item-inner i.icon-form-radio,
+.theme-golf label.label-radio input[type="radio"]:checked ~ .item-inner i.icon-form-radio,
+label.label-radio.theme-golf input[type="radio"]:checked ~ .item-inner i.icon-form-radio {
+  border-color: #003d00;
+}
+.theme-golf label.label-radio input[type="checkbox"]:checked + .item-media i.icon-form-radio:after,
+label.label-radio.theme-golf input[type="checkbox"]:checked + .item-media i.icon-form-radio:after,
+.theme-golf label.label-radio input[type="radio"]:checked + .item-media i.icon-form-radio:after,
+label.label-radio.theme-golf input[type="radio"]:checked + .item-media i.icon-form-radio:after,
+.theme-golf label.label-radio input[type="checkbox"]:checked ~ .item-after i.icon-form-radio:after,
+label.label-radio.theme-golf input[type="checkbox"]:checked ~ .item-after i.icon-form-radio:after,
+.theme-golf label.label-radio input[type="radio"]:checked ~ .item-after i.icon-form-radio:after,
+label.label-radio.theme-golf input[type="radio"]:checked ~ .item-after i.icon-form-radio:after,
+.theme-golf label.label-radio input[type="checkbox"]:checked ~ .item-inner i.icon-form-radio:after,
+label.label-radio.theme-golf input[type="checkbox"]:checked ~ .item-inner i.icon-form-radio:after,
+.theme-golf label.label-radio input[type="radio"]:checked ~ .item-inner i.icon-form-radio:after,
+label.label-radio.theme-golf input[type="radio"]:checked ~ .item-inner i.icon-form-radio:after {
+  background-color: #003d00;
+}
+.theme-golf .focus-state .label,
+.theme-golf .focus-state .floating-label {
+  color: #003d00;
+}
+.theme-golf .item-input-field.focus-state:after,
+.theme-golf .input-field.focus-state:after,
+.theme-golf .item-input-field.not-empty-state:after,
+.theme-golf .input-field.not-empty-state:after {
+  background: #003d00;
+}
+.theme-golf .picker-calendar-day.picker-calendar-day-today span {
+  color: #003d00;
+}
+.theme-golf .picker-calendar-day.picker-calendar-day-selected span {
+  background-color: #003d00;
+  color: #fff;
+}
+.theme-golf .picker-calendar-day.picker-calendar-day-has-events span:after {
+  background-color: #003d00;
+}
+.theme-golf .picker-header {
+  background-color: #003d00;
+}
+.theme-golf .modal-button {
+  color: #003d00;
+}
+.swiper-pagination.color-golf .swiper-pagination-bullet-active,
+.theme-golf .swiper-pagination .swiper-pagination-bullet-active {
+  background-color: #003d00;
+}
+.swiper-button-next.color-golf,
+.swiper-container-rtl .swiper-button-prev.color-golf,
+.theme-golf .swiper-button-next,
+.theme-golf .swiper-container-rtl .swiper-button-prev {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M27%2C22L27%2C22L5%2C44l-2.1-2.1L22.8%2C22L2.9%2C2.1L5%2C0L27%2C22L27%2C22z'%20fill%3D'%23f44336'%2F%3E%3C%2Fsvg%3E");
+}
+.swiper-button-prev.color-golf,
+.swiper-container-rtl .swiper-button-next.color-golf,
+.theme-golf .swiper-button-prev,
+.theme-golf .swiper-container-rtl .swiper-button-next {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M0%2C22L22%2C0l2.1%2C2.1L4.2%2C22l19.9%2C19.9L22%2C44L0%2C22L0%2C22L0%2C22z'%20fill%3D'%23f44336'%2F%3E%3C%2Fsvg%3E");
+}
+.bg-golf,
+a.bg-golf,
+.list-block .swipeout-actions-left a.bg-golf,
+.list-block .swipeout-actions-right a.bg-golf {
+  background-color: #003d00;
+}
+html:not(.watch-active-state) .list-block .bg-golf .item-link:active,
+html:not(.watch-active-state) .list-block a.bg-golf .item-link:active,
+html:not(.watch-active-state) .list-block .list-block .swipeout-actions-left a.bg-golf .item-link:active,
+html:not(.watch-active-state) .list-block .list-block .swipeout-actions-right a.bg-golf .item-link:active,
+html:not(.watch-active-state) .list-block.bg-golf .item-link:active,
+html:not(.watch-active-state) .list-blocka.bg-golf .item-link:active,
+html:not(.watch-active-state) .list-block.list-block .swipeout-actions-left a.bg-golf .item-link:active,
+html:not(.watch-active-state) .list-block.list-block .swipeout-actions-right a.bg-golf .item-link:active,
+html:not(.watch-active-state) .list-block .item-link.bg-golf:active,
+html:not(.watch-active-state) .list-block .item-linka.bg-golf:active,
+html:not(.watch-active-state) .list-block .item-link.list-block .swipeout-actions-left a.bg-golf:active,
+html:not(.watch-active-state) .list-block .item-link.list-block .swipeout-actions-right a.bg-golf:active,
+.list-block .bg-golf .item-link.active-state,
+.list-block a.bg-golf .item-link.active-state,
+.list-block .list-block .swipeout-actions-left a.bg-golf .item-link.active-state,
+.list-block .list-block .swipeout-actions-right a.bg-golf .item-link.active-state,
+.list-block.bg-golf .item-link.active-state,
+.list-blocka.bg-golf .item-link.active-state,
+.list-block.list-block .swipeout-actions-left a.bg-golf .item-link.active-state,
+.list-block.list-block .swipeout-actions-right a.bg-golf .item-link.active-state,
+.list-block .item-link.bg-golf.active-state,
+.list-block .item-linka.bg-golf.active-state,
+.list-block .item-link.list-block .swipeout-actions-left a.bg-golf.active-state,
+.list-block .item-link.list-block .swipeout-actions-right a.bg-golf.active-state {
+  background: #629749;
+}
+.border-golf {
+  border-color: #003d00;
+}
+.list-block .border-golf.item-inner:after,
+.list-block ul.border-golf:after,
+.border-golf:after,
+.list-block .border-golf.item-inner:before,
+.list-block ul.border-golf:before,
+.border-golf:before {
+  background-color: #003d00;
+}
+.theme-golf .floating-button,
+.theme-golf .speed-dial-buttons a,
+.floating-button.theme-golf,
+.speed-dial-buttons a.theme-golf,
+.floating-button.color-golf,
+.speed-dial-buttons a.color-golf {
+  color: #fff;
+  background: #003d00;
+}
+html:not(.watch-active-state) .theme-golf .floating-button:active,
+html:not(.watch-active-state) .theme-golf .speed-dial-buttons a:active,
+html:not(.watch-active-state) .floating-button.theme-golf:active,
+html:not(.watch-active-state) .speed-dial-buttons a.theme-golf:active,
+html:not(.watch-active-state) .floating-button.color-golf:active,
+html:not(.watch-active-state) .speed-dial-buttons a.color-golf:active,
+.theme-golf .floating-button.active-state,
+.theme-golf .speed-dial-buttons a.active-state,
+.floating-button.theme-golf.active-state,
+.speed-dial-buttons a.theme-golf.active-state,
+.floating-button.color-golf.active-state,
+.speed-dial-buttons a.color-golf.active-state {
+  background: #629749;
+}
+.theme-golf .floating-button i,
+.theme-golf .speed-dial-buttons a i,
+.floating-button.theme-golf i,
+.speed-dial-buttons a.theme-golf i,
+.floating-button.color-golf i,
+.speed-dial-buttons a.color-golf i {
+  color: inherit;
+}
+.ripple-golf .ripple-wave {
+  background-color: rgba(244, 67, 54, 0.3);
+}
+.badge.color-golf,
+.badge.theme-golf {
+  background-color: #003d00;
+  color: #fff;
+}

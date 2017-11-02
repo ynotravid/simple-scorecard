@@ -10,20 +10,20 @@
     "f7copy": "cp -R node_modules/framework7 pg/www/lib",
     "f7copyicons": "cp -R node_modules/framework7-icons pg/www/lib",
     "f7copyres": "npm run f7copy && npm run f7copyicons",
+    "copylibs": "cp -R node_modules/gsap pg/www/lib",
     "pgclean": "rm -Rf pg/www/*",
     "pgcopy": "cp -R dist/build.js res src/index.html src/css src/fonts gfx lib pg/www/ && npm run f7copyres",
     "pgrun": "cd pg && phonegap run android",
     "pg": "npm run build && npm run pgclean && npm run pgcopy",
-    "update-pg": "npm run build && npm run pgcopy",
-
-    "pg-copy-win": "xcopy dist\\build.js pg\\www\\ && xcopy res pg\\www\\res /E /Y && xcopy src\\index.html pg\\www\\ && && xcopy gfx pg\\www\\gfx /E /Y && xcopy lib pg\\www\\lib /E /Y",
-    "pg-win": "npm run build && rd /S /Q pg\\www && mkdir pg\\www && npm run pg-copy-win "
+    "update-pg": "npm run build && npm run pgcopy"
   },
   "dependencies": {
     "framework7": "^1.5.2",
     "framework7-icons": "^0.8.9",
     "framework7-vue": "^0.7.0",
-    "vue": "^2.0.1"
+    "gsap": "^1.20.3",
+    "vue": "^2.5.1",
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
     "babel-core": "^6.0.0",
@@ -36,7 +36,7 @@
     "node-sass": "^4.1.1",
     "sass-loader": "^4.0.2",
     "vue-loader": "^10.0.2",
-    "vue-template-compiler": "^2.0.0",
+    "vue-template-compiler": "^2.5.1",
     "webpack": "^2.1.0-beta.25",
     "webpack-dev-server": "^2.1.0-beta.0"
   }

@@ -37,9 +37,11 @@ module.exports = {
   resolve: {
     alias: {
       'vue$': 'vue/dist/vue',
+      'vuex': 'vuex/dist/vuex.js',
       '@': path.join(__dirname, '/src'),
       'Framework7':  path.join(__dirname, '/node_modules/framework7/dist/js/framework7.min.js'),
-      'Framework7Vue': path.join(__dirname, '/node_modules/framework7-vue/dist/framework7-vue.min.js')
+      'Framework7Vue': path.join(__dirname, '/node_modules/framework7-vue/dist/framework7-vue.min.js'),
+      'gsap': path.join(__dirname, '/node_modules/gsap/src/minified/TweenMax.min.js')
     }
   },
   devServer: {

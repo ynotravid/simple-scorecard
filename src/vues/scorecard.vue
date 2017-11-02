@@ -2,60 +2,13 @@
   <div id="scorecard">
     <div class="page" data-page="scorecard">
         <div id="scorecard" style="margin-top: 56px">
-            <!-- <div id="leaderboard">
-                <div class="lb-layer-background">
-                    <div class="lb-row lb-hole-row-background"></div>
-                </div>
-                <div class="lb-layer-select-indicator">
-                    <div id="qa-lb-selection-indicator" class="lb-selection-indicator"></div>
-                </div>
-                <div class="lb-layer-labels">
-                    <div class="lb-row lb-hole-row">
-                        <span class="lb-hole-col--label">Hole</span>
-                        <span class="lb-hole-col">1</span>
-                        <span class="lb-hole-col">2</span>
-                        <span class="lb-hole-col">3</span>
-                        <span class="lb-hole-col">4</span>
-                        <span class="lb-hole-col">5</span>
-                        <span class="lb-hole-col">6</span>
-                        <span class="lb-hole-col">7</span>
-                        <span class="lb-hole-col">8</span>
-                        <span class="lb-hole-col">9</span>
-                        <span class="lb-hole-col">IN</span>
-                    </div>
-                    <div class="lb-row lb-player-row">
-                        <span class="lb-player-col--label">Pug 1</span>
-                        <span class="lb-player-col">4</span>
-                        <span class="lb-player-col">3</span>
-                        <span class="lb-player-col">3</span>
-                        <span class="lb-player-col">4</span>
-                        <span class="lb-player-col">5</span>
-                        <span class="lb-player-col">6</span>
-                        <span class="lb-player-col">3</span>
-                        <span class="lb-player-col">4</span>
-                        <span class="lb-player-col">4</span>
-                        <span class="lb-player-col">28</span>
-                    </div>
-                    <div class="lb-row lb-player-row">
-                        <span class="lb-player-col--label">Pug 2</span>
-                        <span class="lb-player-col">4</span>
-                        <span class="lb-player-col">3</span>
-                        <span class="lb-player-col">3</span>
-                        <span class="lb-player-col">4</span>
-                        <span class="lb-player-col">-</span>
-                        <span class="lb-player-col">6</span>
-                        <span class="lb-player-col">3</span>
-                        <span class="lb-player-col">4</span>
-                        <span class="lb-player-col">4</span>
-                        <span class="lb-player-col">28</span>
-                    </div>
-                </div>
-            </div> -->
+
             <leaderboard></leaderboard>
+
             <div id="hole-card"></div>
         </div>
         <div>
-            <a href="#" class="open-popup link floating-button color-golf"><i class="icon icon-plus"></i></a>
+            <a href="#" class="open-popup link floating-button color-golf" @click="addPlayer"><i class="icon icon-plus"></i></a>
         </div>
         <div class="score-entry-container">
             <div class="se-player-card">
@@ -140,7 +93,9 @@ export default {
         self = this;
     },
     methods : {
-
+        addPlayer() {
+            this.$store.dispatch('addPlayer');
+        }
     }
 }
 </script>
@@ -162,11 +117,11 @@ export default {
 
 
     .se-player-card {
-        border: 1px solid black;
+        // border: 1px solid black;
         height: 110px;
         display: flex;
         /*align-items: center;*/
-        margin: 10px;
+        margin: 8px;
         background-color: $theme-secondary-color--light;
         border-radius: 4px;
         /*background: $theme-secondary-color--light;*/

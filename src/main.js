@@ -6,24 +6,34 @@ import Framework7 from 'Framework7'
 import Framework7Vue from 'Framework7Vue'
 import Scorecard from './vues/scorecard.vue'
 import Leaderboard from './vues/leaderboard.vue'
-import Store from './store.js';
+import PlayerDeck from './vues/player-deck.vue'
+import PlayerCard from './vues/player-card.vue'
+// import VueAwesomeSwiper from 'vue-awesome-swiper'
+// import { swiper, swiperSlide } from 'vue-awesome-swiper'
+
+import Store from './store.js'
 
 
 document.addEventListener('deviceready', function () {
   
-  Vue.use(Vuex)
+  Vue.use(Vuex);
   Vue.use(Framework7Vue);
+  // Vue.use(VueAwesomeSwiper);
 
   const store = new Vuex.Store(Store);    
 
   Vue.component('scorecard', Scorecard);
   Vue.component('leaderboard', Leaderboard);
+  Vue.component('player-deck', PlayerDeck);
+  Vue.component('player-card', PlayerCard);
+  // Vue.component('swiper', swiper);
+  // Vue.component('swiper-slide', swiperSlide);
+
   
   new Vue({
     el: '#app',
     render: h => h(Main),
     store,
-//    components: {'scorecard', Scorecard},
     framework7: {
         root: '#app',
         animateNavBackIcon: true,

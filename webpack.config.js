@@ -41,7 +41,8 @@ module.exports = {
       '@': path.join(__dirname, '/src'),
       'Framework7':  path.join(__dirname, '/node_modules/framework7/dist/js/framework7.min.js'),
       'Framework7Vue': path.join(__dirname, '/node_modules/framework7-vue/dist/framework7-vue.min.js'),
-      'gsap': path.join(__dirname, '/node_modules/gsap/src/minified/TweenMax.min.js')
+      'gsap': path.join(__dirname, '/node_modules/gsap/src/minified/TweenMax.min.js'),
+      'swiper': path.join(__dirname, '/node_modules/swiper/dist/js/swiper.esm.js')
     }
   },
   devServer: {
@@ -61,7 +62,7 @@ if (process.env.NODE_ENV === 'production') {
       }
     }),
     new webpack.LoaderOptionsPlugin({
-      minimize: true
+      minimize: false
     })
   ])
 }

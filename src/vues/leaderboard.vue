@@ -43,6 +43,7 @@
 import {TweenMax, Power2, TimelineLite} from "gsap";
 
 let self;
+let selectedHolePrev = 1;
 
 const SCORES_TO_SHOW = ['FRONT9', 'BACK9', 'ALL18'];
 
@@ -52,7 +53,7 @@ export default {
     data () {
         return {
             isPortrait: window.matchMedia("(orientation: portrait)").matches,
-            selection: 1,
+//            selection: 1,
             showSelection: false,
             selector: {
                 width: 0
@@ -69,6 +70,13 @@ export default {
         players() {
             return this.$store.state.players;
         },
+        selectedHoleNumber() {
+            let selectedHoleNew = this.$store.state.selectedHole;
+            console.log('*** <leaderboard> selectedHoleNumber(): ', selectedHoleNew);
+            if (selectedHoleNew !== selectedHolePrev) {
+            }
+            return selectedHoleNew;
+        },
         columnsToDisplay() {
             // names
             let columns = [
@@ -76,7 +84,7 @@ export default {
                     description: 'player names',
                     header: {
                         classes: ['lb-header-cell--name', 'lb-header-text'],
-                        value: this.viewMode
+                        value: this.selectedHoleNumber
                     },
                     classes: ['lb-col--name'],
                     textClasses: ['lb-data-cell--name'],
@@ -199,18 +207,14 @@ export default {
         })
     },
     methods: {
-        // beforeEnter(el) {
-        // },
-        // enter(el, done) {
-        //     TweenMax.to(el, 1, {left: this.toSelector.offset, onComplete: done});
-        // },
-        // leave(el, done) {
-        // },
         setViewMode(mode) {
             this.$store.dispatch('setViewMode', mode);
         },
+        selectHoleNumber(holeNumber) {
+            this.$store.dispatch('selectHoleNumber', holeNumber);
+        },
         syncSelector() {
-            let targetElm = this.$refs['hole'+this.selection][0];
+            let targetElm = this.$refs['hole'+this.selectedHoleNumber][0];
             let targetBox = targetElm.getBoundingClientRect();
             let lbSelectorElm = this.$refs.lbSelector;
             this.selector.width = targetBox.width;
@@ -228,15 +232,12 @@ export default {
             TweenMax.to(lbSelectorElm, 0, {left: targetBox.left});
             TweenMax.to(lbSelectorElm, .225, {opacity: 1});
 
-
-
-
             //Fade in.
             this.showSelection = true;
         },
         updateViewMode() {
             if (this.isPortrait) {
-                this.setViewMode(this.selection < 10 ? 'FRONT9' : 'BACK9');
+                this.setViewMode(this.selectedHoleNumber < 10 ? 'FRONT9' : 'BACK9');
                 // this.viewMode = this.selection < 10 ? 'FRONT9' : 'BACK9';
             } else {
                 this.setViewMode('ALL18');
@@ -252,12 +253,12 @@ export default {
             if ( !selectable || !event.currentTarget.attributes.hole ) return;
             let newTarget = event.currentTarget;
             let newHoleNumber = newTarget.attributes.hole.value;
-            let previousHole = this.selection || 1;
+            let previousHole = this.selectedHoleNumber || 1;
             let distanceToTravel = Math.abs( newHoleNumber - previousHole );
 
             let animationLength = (225 +(150 * distanceToTravel / 17)) / 1000;
 
-            this.selection = parseInt(event.currentTarget.attributes.hole.value);
+            let newSelection = parseInt(event.currentTarget.attributes.hole.value);
             let targetBox = event.currentTarget.getBoundingClientRect(); 
             let toBeState = {
                 left: targetBox.left, 
@@ -269,6 +270,7 @@ export default {
             TweenMax.to(lbSelectorElm, animationLength, toBeState);
 
             this.selector = Object.assign({}, this.selector, toBeState);
+            this.selectHoleNumber(newSelection);
         }
     }
 }
@@ -279,11 +281,12 @@ export default {
     @import '~@/sass/common-vars.sass';
 
     $lb-row-height: 2rem;
-    $lb--name--width: 5rem;
+    $lb--name--width: 4rem;
 
     #leaderboard {
         height: 100px;
         width: 100%;
+        font-size: 12px;
     }
 
     .lb-layer {

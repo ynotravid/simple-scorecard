@@ -431,18 +431,22 @@ module.exports = g;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mutations__ = __webpack_require__(21);
 
 let pugId = 1;
+let newPlayerId = 100;
+
 const Store = {
   state: {
     viewMode: 'ALL18',
     selectedHole: 1,
     players: [{
       userInfo: {
+        id: 0,
         name: 'Me',
         imgUrl: null
       },
       scores: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]
     }, {
       userInfo: {
+        id: 1,
         name: 'Pug',
         imgUrl: null
       },
@@ -459,6 +463,16 @@ const Store = {
     },
     [__WEBPACK_IMPORTED_MODULE_0__mutations__["c" /* SET_SELECTED_HOLE */]](state, payload) {
       state.selectedHole = payload.value;
+    },
+    [__WEBPACK_IMPORTED_MODULE_0__mutations__["d" /* UPDATE_SCORE */]](state, payload) {
+      let id = payload.value.id;
+      let hole = payload.value.hole;
+      let score = payload.value.score;
+      console.log('*** UPDATE_SCORE mutator');
+      let player = state.players.filter(p => {
+        return p.userInfo.id === id;
+      }).pop();
+      player.scores.splice(hole - 1, 1, score);
     }
   },
   actions: {
@@ -470,6 +484,7 @@ const Store = {
         },
         scores: [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null]
       };
+      playerToAdd.userInfo.id = newPlayerId++;
       commit({ type: __WEBPACK_IMPORTED_MODULE_0__mutations__["a" /* ADD_PLAYER */], value: playerToAdd });
     },
     setViewMode({ commit, state }, viewMode) {
@@ -480,6 +495,17 @@ const Store = {
       commit({
         type: __WEBPACK_IMPORTED_MODULE_0__mutations__["c" /* SET_SELECTED_HOLE */],
         value: holeNumber
+      });
+    },
+    updateScore({ commit, state }, { id, hole, score }) {
+      console.log('*** store - updateScore(): ', id, hole, score);
+      commit({
+        type: __WEBPACK_IMPORTED_MODULE_0__mutations__["d" /* UPDATE_SCORE */],
+        value: {
+          id,
+          hole,
+          score
+        }
       });
     }
   }
@@ -12340,7 +12366,9 @@ const SCORES_TO_SHOW = ['FRONT9', 'BACK9', 'ALL18'];
         selectedHoleNumber() {
             let selectedHoleNew = this.$store.state.selectedHole;
             console.log('*** <leaderboard> selectedHoleNumber(): ', selectedHoleNew);
-            if (selectedHoleNew !== selectedHolePrev) {}
+            if (selectedHoleNew !== selectedHolePrev) {
+                self.selectHoleByHoleNumber(selectedHoleNew);
+            }
             return selectedHoleNew;
         },
         columnsToDisplay() {
@@ -12510,6 +12538,15 @@ const SCORES_TO_SHOW = ['FRONT9', 'BACK9', 'ALL18'];
 
             //Fade in.
             this.showSelection = true;
+        },
+        selectHoleByHoleNumber(number) {
+            //Move it into position.
+            let newTargetElm = this.$refs['hole' + number][0];
+            let lbSelectorElm = this.$refs.lbSelector;
+
+            let targetBox = newTargetElm.getBoundingClientRect();
+            this.selector.width = targetBox.width;
+            __WEBPACK_IMPORTED_MODULE_0_gsap__["TweenMax"].to(lbSelectorElm, .3, { left: targetBox.left });
         },
         updateViewMode() {
             if (this.isPortrait) {
@@ -12683,8 +12720,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 // import {TweenMax, Power2, TimelineLite} from "gsap";
 
@@ -12710,9 +12745,11 @@ let selectedHolePrev = 1;
             let selectedHoleNew = this.$store.state.selectedHole;
             console.log('*** <player-deck> selectedHole(): ', selectedHoleNew);
             if (this.mySwiper && selectedHoleNew !== selectedHolePrev) {
-                this.mySwiper.slideTo(selectedHoleNew, 300);
+                console.log('*** <player-deck> selectedHole() mySwiper.slideTo(): ', selectedHoleNew);
+                this.mySwiper.slideTo(selectedHoleNew - 1, 300);
                 // mySwiper.slideTo(index, speed, runCallbacks);
             }
+            selectedHolePrev = selectedHoleNew;
             return selectedHoleNew;
         }
     },
@@ -12736,8 +12773,8 @@ let selectedHolePrev = 1;
                 init: function () {
                     console.log('*** swiper initialized');
                 },
-                slideChangeTransitionEnd: function () {
-                    self.slideChangeHandler();
+                transitionStart: function () {
+                    self.slideChangeHandler(this.realIndex);
                 }
             },
             grabCursor: true
@@ -12746,13 +12783,14 @@ let selectedHolePrev = 1;
     methods: {
         updateScore(playerId, holeNumber, newScore) {
             console.log('updateScore(): ', playerId, holeNumber, newScore);
+            this.$store.dispatch('updateScore', { id: playerId, hole: holeNumber, score: newScore });
         },
         selectHoleNumber(holeNumber) {
             this.$store.dispatch('selectHoleNumber', holeNumber);
         },
         slideChangeHandler(x) {
-            console.log('*** slideChangeHandler(): ', x);
-            self.selectHoleNumber(this.mySwiper.realIndex);
+            console.log('*** slideChangeHandler(): ', x, this.mySwiper.realIndex);
+            self.selectHoleNumber(this.mySwiper.realIndex + 1);
         }
 
     }
@@ -12881,6 +12919,9 @@ const SET_VIEW = 'SET_VIEW';
 
 const SET_SELECTED_HOLE = 'SET_SELECTED_HOLE';
 /* harmony export (immutable) */ __webpack_exports__["c"] = SET_SELECTED_HOLE;
+
+const UPDATE_SCORE = 'UPDATE_SCORE';
+/* harmony export (immutable) */ __webpack_exports__["d"] = UPDATE_SCORE;
 
 
 /***/ }),
@@ -21434,32 +21475,29 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "id": "player-deck"
     }
-  }, [_c('div', [_vm._v(_vm._s(_vm.selectedHole))]), _vm._v(" "), _c('div', {
+  }, [_c('div', {
     staticClass: "swiper-container"
   }, [_c('div', {
     staticClass: "swiper-wrapper"
-  }, [_vm._l((18), function(holeNumber) {
+  }, _vm._l((18), function(holeNumber) {
     return _c('div', {
       staticClass: "swiper-slide"
     }, _vm._l((_vm.players), function(player, index) {
       return _c('player-card', {
         attrs: {
-          "player-id": 'blah',
+          "player-id": player.userInfo.id,
           "hole-number": holeNumber,
           "name": player.userInfo.name,
           "img-url": player.userInfo.imgUrl,
-          "score": player.scores[0]
+          "score": player.scores[holeNumber - 1],
+          "active-hole": _vm.selectedHole === holeNumber
         },
         on: {
           "update-score": _vm.updateScore
         }
       })
     }))
-  }), _vm._v(" "), _c('div', {
-    staticClass: "swiper-slide"
-  }, [_vm._v("Slide 2")]), _vm._v(" "), _c('div', {
-    staticClass: "swiper-slide"
-  }, [_vm._v("Slide 3")]), _vm._v("\n            ...\n        ")], 2), _vm._v(" "), _c('div', {
+  })), _vm._v(" "), _c('div', {
     staticClass: "swiper-pagination"
   }), _vm._v(" "), _c('div', {
     staticClass: "swiper-button-prev"

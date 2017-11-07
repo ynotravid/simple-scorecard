@@ -74,6 +74,7 @@ export default {
             let selectedHoleNew = this.$store.state.selectedHole;
             console.log('*** <leaderboard> selectedHoleNumber(): ', selectedHoleNew);
             if (selectedHoleNew !== selectedHolePrev) {
+                self.selectHoleByHoleNumber(selectedHoleNew);
             }
             return selectedHoleNew;
         },
@@ -234,6 +235,15 @@ export default {
 
             //Fade in.
             this.showSelection = true;
+        },
+        selectHoleByHoleNumber(number) {
+            //Move it into position.
+            let newTargetElm = this.$refs['hole' +number][0];
+            let lbSelectorElm = this.$refs.lbSelector;
+
+            let targetBox = newTargetElm.getBoundingClientRect();
+            this.selector.width = targetBox.width;
+            TweenMax.to(lbSelectorElm, .3, {left: targetBox.left});
         },
         updateViewMode() {
             if (this.isPortrait) {

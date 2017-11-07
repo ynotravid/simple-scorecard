@@ -1,24 +1,22 @@
 <template>
     <div id="player-deck" class="player-deck">
                 <!-- Slider main container -->
-                <div>{{selectedHole}}</div>
+                <!-- <div>{{selectedHole}}</div> -->
         <div class="swiper-container">
             <!-- Additional required wrapper -->
             <div class="swiper-wrapper">
                 <!-- Slides -->
                 <div v-for="holeNumber in 18"class="swiper-slide">
                     <player-card  v-for="(player, index) in players"
-                                  :player-id="'blah'"
+                                  :player-id="player.userInfo.id"
                                   :hole-number="holeNumber"
                                   :name="player.userInfo.name"
                                   :img-url="player.userInfo.imgUrl"
-                                  :score="player.scores[0]"
+                                  :score="player.scores[holeNumber -1]"
+                                  :active-hole="selectedHole === holeNumber"
                                   v-on:update-score="updateScore">
                     </player-card>        
                 </div>
-                <div class="swiper-slide">Slide 2</div>
-                <div class="swiper-slide">Slide 3</div>
-                ...
             </div>
             <!-- If we need pagination -->
             <div class="swiper-pagination"></div>
@@ -59,9 +57,11 @@ export default {
             let selectedHoleNew = this.$store.state.selectedHole;
             console.log('*** <player-deck> selectedHole(): ', selectedHoleNew);
             if (this.mySwiper && selectedHoleNew !== selectedHolePrev) {
-                this.mySwiper.slideTo(selectedHoleNew, 300);
+                console.log('*** <player-deck> selectedHole() mySwiper.slideTo(): ', selectedHoleNew);
+                this.mySwiper.slideTo(selectedHoleNew -1, 300);
                 // mySwiper.slideTo(index, speed, runCallbacks);
             }
+            selectedHolePrev = selectedHoleNew;
             return selectedHoleNew;
         }
     },
@@ -85,8 +85,8 @@ export default {
                 init: function () {
                     console.log('*** swiper initialized');
                 },
-                slideChangeTransitionEnd: function() {
-//                    self.slideChangeHandler();
+                transitionStart: function() {
+                   self.slideChangeHandler(this.realIndex);
                 }
             },
             grabCursor: true,
@@ -95,13 +95,14 @@ export default {
     methods: {
         updateScore(playerId, holeNumber, newScore) {
             console.log('updateScore(): ', playerId, holeNumber, newScore);
+            this.$store.dispatch('updateScore', {id: playerId, hole: holeNumber, score: newScore});
         },
         selectHoleNumber(holeNumber) {
             this.$store.dispatch('selectHoleNumber', holeNumber);
         },
         slideChangeHandler(x) {
-            console.log('*** slideChangeHandler(): ', x);
-            self.selectHoleNumber(this.mySwiper.realIndex);
+            console.log('*** slideChangeHandler(): ', x, this.mySwiper.realIndex);
+            self.selectHoleNumber(this.mySwiper.realIndex +1);
         }        
         
     }

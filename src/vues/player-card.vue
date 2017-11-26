@@ -43,7 +43,7 @@ export default {
     name: 'PlayerCard',
     props: {
         playerId: {
-            type: String,
+            type: Number,
             required: true
         },
         holeNumber: {

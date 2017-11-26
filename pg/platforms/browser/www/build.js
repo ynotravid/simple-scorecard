@@ -12332,6 +12332,46 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -12346,7 +12386,6 @@ const SCORES_TO_SHOW = ['FRONT9', 'BACK9', 'ALL18'];
     data() {
         return {
             isPortrait: window.matchMedia("(orientation: portrait)").matches,
-            //            selection: 1,
             showSelection: false,
             selector: {
                 width: 0
@@ -12365,15 +12404,18 @@ const SCORES_TO_SHOW = ['FRONT9', 'BACK9', 'ALL18'];
         },
         selectedHoleNumber() {
             let selectedHoleNew = this.$store.state.selectedHole;
-            console.log('*** <leaderboard> selectedHoleNumber(): ', selectedHoleNew);
+            // console.log('*** <leaderboard> selectedHoleNumber(): ', selectedHoleNew);
             if (selectedHoleNew !== selectedHolePrev) {
                 self.selectHoleByHoleNumber(selectedHoleNew);
             }
             return selectedHoleNew;
         },
-        columnsToDisplay() {
-            // names
-            let columns = [{
+        isShowFront9() {
+            const mode = this.$store.state.viewMode;
+            return mode === 'FRONT9' || 'ALL18';
+        },
+        computePlayerNamesCol() {
+            return {
                 description: 'player names',
                 header: {
                     classes: ['lb-header-cell--name', 'lb-header-text'],
@@ -12385,8 +12427,10 @@ const SCORES_TO_SHOW = ['FRONT9', 'BACK9', 'ALL18'];
                     return player.userInfo.name;
                 }),
                 selectable: false
-            }];
-
+            };
+        },
+        computeFront9() {
+            let columns = [];
             if (this.viewMode && this.viewMode === 'FRONT9' || this.viewMode === 'ALL18') {
                 // Front 9 scores
                 for (let i = 0; i < 9; i++) {
@@ -12405,26 +12449,13 @@ const SCORES_TO_SHOW = ['FRONT9', 'BACK9', 'ALL18'];
                         selectable: true
                     });
                 }
-
-                // Front 9 subtotal
-                columns.push({
-                    description: 'Font 9 score',
-                    header: {
-                        classes: ['lb-header-cell', 'lb-header-text'],
-                        value: ''
-                    },
-                    classes: ['lb-col'],
-                    textClasses: ['lb-data-cell'],
-                    values: this.players.map(player => {
-                        return this.subTotal(player.scores, 0, 8);
-                    }),
-                    selectable: false
-                });
             }
-
+            return columns;
+        },
+        computeBack9() {
+            let columns = [];
             if (this.viewMode && this.viewMode === 'BACK9' || this.viewMode === 'ALL18') {
-
-                // Back 9 scores
+                // Front 9 scores
                 for (let i = 9; i < 18; i++) {
                     columns.push({
                         description: `hole ${i + 1} score`,
@@ -12441,55 +12472,53 @@ const SCORES_TO_SHOW = ['FRONT9', 'BACK9', 'ALL18'];
                         selectable: true
                     });
                 }
-
-                // Back 9 subtotal
-                columns.push({
-                    description: 'Back 9 score',
-                    header: {
-                        classes: ['lb-header-cell', 'lb-header-text'],
-                        value: ''
-                    },
-                    classes: ['lb-col'],
-                    textClasses: ['lb-data-cell'],
-                    values: this.players.map(player => {
-                        return this.subTotal(player.scores, 9, 17);
-                    }),
-                    selectable: false
-                });
-
-                // Total score
-                columns.push({
-                    description: 'Total score',
-                    header: {
-                        classes: ['lb-header-cell', 'lb-header-text'],
-                        value: 'TOT'
-                    },
-                    classes: ['lb-col'],
-                    textClasses: ['lb-data-cell'],
-                    values: this.players.map(player => {
-                        return this.subTotal(player.scores, 0, 17);
-                    }),
-                    selectable: false
-                });
             }
-
             return columns;
         },
-        leaderBoardHeight() {
-            return 2 * (this.players.length + 1);
+        compFront9SubTotal() {
+            return {
+                description: 'Font 9 score',
+                header: {
+                    classes: ['lb-header-cell', 'lb-header-text'],
+                    value: '1/2'
+                },
+                classes: ['lb-col--subtotal'],
+                textClasses: ['lb-data-cell'],
+                values: this.players.map(player => {
+                    return this.subTotal(player.scores, 0, 8);
+                }),
+                selectable: false
+            };
         },
-        compLeaderBoardHeight: function () {
+        compBack9SubTotal() {
+            return {
+                description: 'Back 9 score',
+                header: {
+                    classes: ['lb-header-cell', 'lb-header-text'],
+                    value: '2/2'
+                },
+                classes: ['lb-col--subtotal'],
+                textClasses: ['lb-data-cell'],
+                values: this.players.map(player => {
+                    return this.subTotal(player.scores, 9, 17);
+                }),
+                selectable: false
+            };
+        },
+        leaderBoardHeight() {
+            return 1.5 * (this.players.length + 1);
+        },
+        compLeaderBoardHeight() {
             return {
                 active: true,
-                height: 2 * (this.players.length + 1) + 'rem'
+                height: 1.5 * (this.players.length + 1) + 'rem'
             };
         },
         selectorStyles() {
             return {
                 active: true,
-                height: 2 * (this.players.length + 1) + 'rem',
+                height: 1.5 * (this.players.length + 1) + 'rem',
                 width: this.selector.width + 'px'
-                // left: this.selector.left +'px'
             };
         }
     },
@@ -12511,6 +12540,13 @@ const SCORES_TO_SHOW = ['FRONT9', 'BACK9', 'ALL18'];
         });
     },
     methods: {
+        selectOMode(mode) {
+            const MODE_MAP = { FRONT9: 0, BACK9: 1, ALL18: 2 };
+            const MODES = ['FRONT9', 'BACK9', 'ALL18'];
+            let newMode = MODES[(MODE_MAP[this.viewMode] + 1) % 3];
+            console.log('*** swap to: ', newMode);
+            this.setViewMode(newMode);
+        },
         setViewMode(mode) {
             this.$store.dispatch('setViewMode', mode);
         },
@@ -12525,14 +12561,12 @@ const SCORES_TO_SHOW = ['FRONT9', 'BACK9', 'ALL18'];
             __WEBPACK_IMPORTED_MODULE_0_gsap__["TweenMax"].to(lbSelectorElm, 0, { left: targetBox.left });
         },
         initialSelection() {
-            //Move it into position.
+            // Move it into position.
             let newTargetElm = this.$refs.hole1[0];
             let lbSelectorElm = this.$refs.lbSelector;
 
             let targetBox = newTargetElm.getBoundingClientRect();
             this.selector.width = targetBox.width;
-            // this.selector.left = targetBox.left;
-            // lbSelectorElm.left = targetBox.left;
             __WEBPACK_IMPORTED_MODULE_0_gsap__["TweenMax"].to(lbSelectorElm, 0, { left: targetBox.left });
             __WEBPACK_IMPORTED_MODULE_0_gsap__["TweenMax"].to(lbSelectorElm, .225, { opacity: 1 });
 
@@ -12540,7 +12574,7 @@ const SCORES_TO_SHOW = ['FRONT9', 'BACK9', 'ALL18'];
             this.showSelection = true;
         },
         selectHoleByHoleNumber(number) {
-            //Move it into position.
+            // Move it into position.
             let newTargetElm = this.$refs['hole' + number][0];
             let lbSelectorElm = this.$refs.lbSelector;
 
@@ -12551,10 +12585,8 @@ const SCORES_TO_SHOW = ['FRONT9', 'BACK9', 'ALL18'];
         updateViewMode() {
             if (this.isPortrait) {
                 this.setViewMode(this.selectedHoleNumber < 10 ? 'FRONT9' : 'BACK9');
-                // this.viewMode = this.selection < 10 ? 'FRONT9' : 'BACK9';
             } else {
                 this.setViewMode('ALL18');
-                // this.viewMode = 'ALL18'
             }
         },
         subTotal(scores, start, end) {
@@ -12639,7 +12671,7 @@ let self;
     name: 'PlayerCard',
     props: {
         playerId: {
-            type: String,
+            type: Number,
             required: true
         },
         holeNumber: {
@@ -12961,7 +12993,7 @@ exports = module.exports = __webpack_require__(0)();
 
 
 // module
-exports.push([module.i, "#leaderboard[data-v-6c106a1e]{height:100px;width:100%;font-size:12px}.lb-layer[data-v-6c106a1e]{position:absolute;width:100%}.lb-layer-background--container[data-v-6c106a1e]{background-color:#fff8e1}.lb-layer-background--header[data-v-6c106a1e]{height:2rem;display:flex;flex-direction:row;align-items:center;background-color:#32681d;color:#fff}.lb-selection-indicator[data-v-6c106a1e]{opacity:0;position:absolute;background-color:hsla(120,2%,88%,.8);border:2px solid;border-radius:4px;box-shadow:1px 0 3px rgba(0,0,0,.12)}.lb-layer-info--container[data-v-6c106a1e]{display:flex;flex-direction:row;align-items:center}.lb-col--name[data-v-6c106a1e]{width:4rem;margin-left:1rem}.lb-col[data-v-6c106a1e]{display:flex;flex:1 0 0;flex-direction:column;align-items:center}.lb-header-text[data-v-6c106a1e]{text-shadow:2px 2px #000;-webkit-text-fill-color:#fff;-webkit-text-stroke-width:1px;-webkit-text-stroke-color:#000}.lb-data-cell[data-v-6c106a1e],.lb-header-cell--name[data-v-6c106a1e],.lb-header-cell[data-v-6c106a1e]{height:2rem;display:flex;line-height:2rem;text-align:center;justify-content:center;user-select:none}.lb-data-cell--name[data-v-6c106a1e]{height:2rem;display:flex;line-height:2rem;text-align:center;user-select:none}.fade-enter-active[data-v-6c106a1e],.fade-leave-active[data-v-6c106a1e]{transition:opacity .5s}.fade-enter[data-v-6c106a1e],.fade-leave-to[data-v-6c106a1e]{opacity:0}", ""]);
+exports.push([module.i, "#leaderboard[data-v-6c106a1e]{height:100px;width:100%;font-size:10px}.lb-layer[data-v-6c106a1e]{position:absolute;width:100%}.lb-layer-background--container[data-v-6c106a1e]{background-color:#fff8e1}.lb-layer-background--header[data-v-6c106a1e]{height:1.5rem;display:flex;flex-direction:row;align-items:center;background-color:#32681d;color:#fff}.lb-selection-indicator[data-v-6c106a1e]{opacity:0;position:absolute;background-color:hsla(120,2%,88%,.8);border:2px solid;border-radius:4px;box-shadow:1px 0 3px rgba(0,0,0,.12)}.lb-layer-info--container[data-v-6c106a1e]{display:flex;flex-direction:row;align-items:center;padding:0 .75rem}.lb-col[data-v-6c106a1e]{display:flex;flex:1 0 0;flex-direction:column;align-items:center}.lb-col--name[data-v-6c106a1e]{width:2.5rem}.lb-col--score-container[data-v-6c106a1e]{display:flex;flex-grow:1;overflow:hidden}.lb-col--subtotal[data-v-6c106a1e]{display:inline;width:1rem}.lb-header-text[data-v-6c106a1e]{text-shadow:2px 2px #000;-webkit-text-fill-color:#fff;-webkit-text-stroke-width:1px;-webkit-text-stroke-color:#000}.lb-data-cell[data-v-6c106a1e],.lb-header-cell--name[data-v-6c106a1e],.lb-header-cell[data-v-6c106a1e]{height:1.5rem;display:flex;line-height:1.5rem;text-align:center;justify-content:center;user-select:none}.lb-data-cell--name[data-v-6c106a1e]{height:1.5rem;display:flex;line-height:1.5rem;text-align:center;user-select:none}.transfont9-enter-active[data-v-6c106a1e],.transfont9-leave-active[data-v-6c106a1e]{transition:all 1s}.transfont9-enter[data-v-6c106a1e],.transfont9-leave-to[data-v-6c106a1e]{flex:.00001}", ""]);
 
 // exports
 
@@ -21306,8 +21338,29 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('div', {
     staticClass: "lb-layer-info--container"
-  }, _vm._l((_vm.columnsToDisplay), function(col, index) {
+  }, [_c('div', {
+    key: "colheaderPlayerNames",
+    ref: 'playerNames',
+    class: [_vm.compLeaderBoardHeight ].concat( _vm.computePlayerNamesCol.classes),
+    attrs: {
+      "id": 'lb-col-player-names'
+    }
+  }, [_c('div', {
+    class: _vm.computePlayerNamesCol.header.classes
+  }, [_vm._v(_vm._s(_vm.computePlayerNamesCol.header.value))]), _vm._v(" "), _vm._l((_vm.computePlayerNamesCol.values), function(val) {
     return _c('div', {
+      key: "colHeaderPlayerValue",
+      class: _vm.computePlayerNamesCol.textClasses
+    }, [_vm._v(_vm._s(val || '-'))])
+  })], 2), _vm._v(" "), _c('transition', {
+    attrs: {
+      "name": "transfont9"
+    }
+  }, [(_vm.viewMode !== 'BACK9') ? _c('div', {
+    staticClass: "lb-col--score-container"
+  }, _vm._l((_vm.computeFront9), function(col, index) {
+    return _c('div', {
+      key: col.holeNumber,
       ref: 'hole' + col.holeNumber,
       refInFor: true,
       class: [_vm.compLeaderBoardHeight ].concat( col.classes),
@@ -21321,13 +21374,61 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         }
       }
     }, [_c('div', {
+      key: 'lbl' + col.holeNumber,
       class: col.header.classes
-    }, [_vm._v(_vm._s(col.header.value))]), _vm._v(" "), _vm._l((col.values), function(val) {
+    }, [_vm._v(_vm._s(col.header.value))]), _vm._v(" "), _vm._l((col.values), function(val, i) {
       return _c('div', {
+        key: 'colHeaderValue' + col.holeNumber + i,
         class: col.textClasses
       }, [_vm._v(_vm._s(val || '-'))])
     })], 2)
-  }))])])
+  })) : _vm._e()]), _vm._v(" "), _c('div', [_c('div', {
+    class: [_vm.compLeaderBoardHeight ].concat( _vm.compFront9SubTotal.classes)
+  }, [_c('div', {
+    class: _vm.compFront9SubTotal.header.classes
+  }, [_vm._v(_vm._s(_vm.compFront9SubTotal.header.value))]), _vm._v(" "), _vm._l((_vm.compFront9SubTotal.values), function(val) {
+    return _c('div', {
+      class: _vm.compFront9SubTotal.textClasses
+    }, [_vm._v(_vm._s(val || '-'))])
+  })], 2)]), _vm._v(" "), _c('transition', {
+    attrs: {
+      "name": "transfont9"
+    }
+  }, [(_vm.viewMode !== 'FRONT9') ? _c('div', {
+    staticClass: "lb-col--score-container"
+  }, _vm._l((_vm.computeBack9), function(col, index) {
+    return _c('div', {
+      key: col.holeNumber,
+      ref: 'hole' + col.holeNumber,
+      refInFor: true,
+      class: [_vm.compLeaderBoardHeight ].concat( col.classes),
+      attrs: {
+        "id": 'lb-col-' + index,
+        "hole": col.holeNumber
+      },
+      on: {
+        "!click": function($event) {
+          _vm.handleScoreSelect(col.selectable, $event)
+        }
+      }
+    }, [_c('div', {
+      key: 'lbl' + col.holeNumber,
+      class: col.header.classes
+    }, [_vm._v(_vm._s(col.header.value))]), _vm._v(" "), _vm._l((col.values), function(val, i) {
+      return _c('div', {
+        key: 'colHeaderValue' + col.holeNumber + i,
+        class: col.textClasses
+      }, [_vm._v(_vm._s(val || '-'))])
+    })], 2)
+  })) : _vm._e()]), _vm._v(" "), _c('div', [_c('div', {
+    class: [_vm.compLeaderBoardHeight ].concat( _vm.compBack9SubTotal.classes)
+  }, [_c('div', {
+    class: _vm.compBack9SubTotal.header.classes
+  }, [_vm._v(_vm._s(_vm.compBack9SubTotal.header.value))]), _vm._v(" "), _vm._l((_vm.compBack9SubTotal.values), function(val) {
+    return _c('div', {
+      class: _vm.compBack9SubTotal.textClasses
+    }, [_vm._v(_vm._s(val || '-'))])
+  })], 2)])], 1)])])
 },staticRenderFns: []}
 
 /***/ }),

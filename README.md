@@ -1,3 +1,8 @@
+# The base for this app was copied from the PhoneGap reference app
+Below is the original readme.
+
+
+
 # Twitvue04
 
 ## Port a Vue.js webapp to PhoneGap
